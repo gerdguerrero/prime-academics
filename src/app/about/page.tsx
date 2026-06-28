@@ -1,0 +1,3 @@
+export default function AboutPage() {
+  return <main className="mx-auto max-w-4xl px-4 py-12"><div className="rounded-2xl border bg-white p-8 shadow-sm"><p className="text-xs font-black uppercase tracking-[0.2em] text-orange-500">About</p><h1 className="mt-2 text-4xl font-black">Prime Academics</h1><p className="mt-4 text-lg leading-8 text-slate-700">Prime Academics is a budget-friendly school supplies store concept built for students, teachers, and schools. The storefront focuses on practical everyday essentials, school kits, and classroom-ready packs.</p><p className="mt-4 text-slate-600">This preview uses sample catalog entries for client review. Final inventory, prices, and availability will be confirmed before launch.</p></div></main>;
+}

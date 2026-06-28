@@ -1,0 +1,3 @@
+export default function ContactPage() {
+  return <main className="mx-auto max-w-4xl px-4 py-12"><div className="rounded-2xl border bg-white p-8 shadow-sm"><p className="text-xs font-black uppercase tracking-[0.2em] text-orange-500">Contact</p><h1 className="mt-2 text-4xl font-black">Contact Prime Academics</h1><p className="mt-4 text-slate-700">For preview purposes, contact details are placeholders and should be replaced with the client’s official channels.</p><div className="mt-6 grid gap-3 text-sm font-bold text-slate-700"><p>Email: hello@primeacademics.ph</p><p>Mobile: +63 900 000 0000</p><p>Location: To be confirmed</p></div></div></main>;
+}
