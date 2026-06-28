@@ -109,7 +109,7 @@ function PromoTicker() {
     'Classroom packs available',
     'School kits from ₱199',
     'Under ₱99 essentials',
-    'Payment gateway ready soon',
+    'Secure online payment via Maya',
     'Contact us for school quotations',
   ];
   const tickerItems = [...items, ...items];

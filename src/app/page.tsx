@@ -60,7 +60,7 @@ export default function Home() {
           <div className="rounded-xl bg-blue-50 p-4"><span className="text-blue-700">✓ Authentic school brands</span><p className="mt-1 text-xs font-medium text-slate-500">Mongol, Pilot, Faber-Castell, Crayola, Casio, Deli, and more.</p></div>
           <div className="rounded-xl bg-orange-50 p-4"><span className="text-orange-600">✓ Budget-friendly pricing</span><p className="mt-1 text-xs font-medium text-slate-500">Everyday supplies, under-₱99 finds, bundles, and bulk packs.</p></div>
           <div className="rounded-xl bg-blue-50 p-4"><span className="text-blue-700">✓ Bulk order support</span><p className="mt-1 text-xs font-medium text-slate-500">Classroom packs, school kits, and quote requests for schools.</p></div>
-          <div className="rounded-xl bg-orange-50 p-4"><span className="text-orange-600">✓ Checkout ready</span><p className="mt-1 text-xs font-medium text-slate-500">Customer details, delivery address, and preferred payment method before call confirmation.</p></div>
+          <div className="rounded-xl bg-orange-50 p-4"><span className="text-orange-600">✓ Secure checkout</span><p className="mt-1 text-xs font-medium text-slate-500">Pay securely via Maya. Enter your delivery details and complete payment in one flow.</p></div>
         </div>
       </section>
 
