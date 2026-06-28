@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { generateEpaygamesTransaction, getEpaygamesConfig, makeOrderReference, splitCustomerName } from '@/lib/epaygames';
 import { getProduct } from '@/lib/products';
+import { saveOrder } from '@/lib/orders';
 
 type CheckoutItemInput = { productId?: unknown; quantity?: unknown; variant?: unknown };
 
@@ -127,6 +128,31 @@ export async function POST(request: Request) {
     if (!transaction.web_payment_url) {
       return NextResponse.json({ error: 'Gateway did not return a web payment URL.' }, { status: 502 });
     }
+
+    // Save order for webhook email delivery
+    await saveOrder({
+      referenceNo,
+      customerName: asString(form.name),
+      customerEmail: asString(form.email),
+      items: validLineItems.map((item) => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      subtotal: amount,
+      serviceFee: 0,
+      total: amount,
+      paymentMethod: channelCode,
+      shippingAddress: {
+        street: asString(form.streetAddress),
+        barangay: asString(form.barangay),
+        city: asString(form.city),
+        province: asString(form.province),
+        postalCode: asString(form.postalCode),
+      },
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+    });
 
     return NextResponse.json({
       mode: 'gateway_redirect',

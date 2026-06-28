@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { verifyEpaygamesSignature } from '@/lib/epaygames';
+import { updateOrderStatus } from '@/lib/orders';
+import { sendOrderConfirmation } from '@/lib/email';
 
 const STAGING_IPS = ['43.198.4.7'];
 const PRODUCTION_IPS = ['18.166.179.109', '18.166.252.124'];
@@ -37,7 +39,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid transaction status.' }, { status: 400 });
   }
 
-  // No database is wired yet. This endpoint verifies authenticity and acknowledges quickly.
-  // When persistence is added, update the matching order by referenceNo asynchronously.
+  // Update order and send email on completion
+  if (status === 'completed') {
+    const order = await updateOrderStatus(referenceNo, 'completed');
+    if (order) {
+      sendOrderConfirmation({
+        orderReference: order.referenceNo,
+        customerName: order.customerName,
+        customerEmail: order.customerEmail,
+        items: order.items,
+        subtotal: order.subtotal,
+        serviceFee: order.serviceFee,
+        total: order.total,
+        paymentMethod: order.paymentMethod,
+        shippingAddress: order.shippingAddress,
+      }).catch((err) =>
+        console.error('Failed to send order confirmation email:', err),
+      );
+    }
+  } else {
+    await updateOrderStatus(referenceNo, status).catch(() => null);
+  }
+
   return NextResponse.json({ ok: true, referenceNo, status });
 }
