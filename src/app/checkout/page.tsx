@@ -208,7 +208,6 @@ export default function CheckoutPage() {
     }
   };
 
-  const selectedChannelDetails = channels.find((channel) => channel.code === selectedChannel);
   const serviceFee = quote?.service_fee ?? 0;
   const totalWithFee = quote?.total_amount ?? subtotal;
 
@@ -272,7 +271,6 @@ export default function CheckoutPage() {
             <div className="flex justify-between text-lg font-black"><span>Total to pay</span><span>{formatMoney(totalWithFee)}</span></div>
           </div>
           {items.length && !selectedChannel && channelMessage ? <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs font-semibold text-amber-900">{channelMessage}</div> : null}
-          {selectedChannelDetails ? <div className="mt-4 rounded-xl bg-blue-50 p-3 text-xs font-semibold text-slate-700">Secure payment via {selectedChannelDetails.name}. You will be redirected to the Epaygames payment page after submitting.</div> : null}
           {items.length ? (
             <button disabled={!selectedChannel || submitting} className="mt-5 w-full rounded-xl bg-orange-500 py-3 font-black text-white disabled:bg-slate-300">
               {submitting ? 'Starting checkout...' : gatewayConfigured ? 'Continue to Payment' : 'Place Order Request'}
