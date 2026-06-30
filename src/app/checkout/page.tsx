@@ -42,7 +42,6 @@ const initialForm = {
 export default function CheckoutPage() {
   const { items, subtotal, clearCart } = useCart();
   const [form, setForm] = useState(initialForm);
-  const [channels, setChannels] = useState<PaymentChannel[]>([]);
   const [selectedChannel, setSelectedChannel] = useState('');
   const [gatewayConfigured, setGatewayConfigured] = useState(false);
   const [channelMessage, setChannelMessage] = useState('');
@@ -77,7 +76,6 @@ export default function CheckoutPage() {
       .then((payload: { configured: boolean; channels: PaymentChannel[]; message?: string }) => {
         if (!isMounted) return;
         const usableChannels = payload.channels.filter((channel) => channel.is_web_payment);
-        setChannels(usableChannels);
         setGatewayConfigured(payload.configured);
         setChannelMessage(payload.message ?? '');
         setSelectedChannel((current) => current || usableChannels[0]?.code || '');
