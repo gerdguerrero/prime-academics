@@ -14,6 +14,14 @@ export async function GET() {
 
   try {
     const channels = await getEpaygamesChannels();
+    const webChannels = channels.filter((channel) => channel.is_web_payment);
+    if (!webChannels.length) {
+      return NextResponse.json({
+        configured: true,
+        channels: [],
+        message: 'Epaygames production credentials are connected, but this merchant account has no enabled web-payment channels yet. Ask Epaygames to enable a web-payment channel before accepting checkout payments.',
+      });
+    }
     return NextResponse.json({ configured: true, channels });
   } catch (error) {
     return NextResponse.json(

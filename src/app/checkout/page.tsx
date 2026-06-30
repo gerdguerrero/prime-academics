@@ -217,7 +217,7 @@ export default function CheckoutPage() {
       <h1 className="text-3xl font-black">Secure checkout</h1>
       <p className="mt-1 text-slate-600">Enter delivery details, then continue to the secure Epaygames payment page.</p>
 
-      {!gatewayConfigured && channelMessage ? (
+      {channelMessage ? (
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-900">
           {channelMessage}
         </div>
@@ -271,6 +271,7 @@ export default function CheckoutPage() {
             <div className="flex justify-between text-slate-600"><span>Gateway fee</span><strong>{formatMoney(serviceFee)}</strong></div>
             <div className="flex justify-between text-lg font-black"><span>Total to pay</span><span>{formatMoney(totalWithFee)}</span></div>
           </div>
+          {items.length && !selectedChannel && channelMessage ? <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs font-semibold text-amber-900">{channelMessage}</div> : null}
           {selectedChannelDetails ? <div className="mt-4 rounded-xl bg-blue-50 p-3 text-xs font-semibold text-slate-700">Secure payment via {selectedChannelDetails.name}. You will be redirected to the Epaygames payment page after submitting.</div> : null}
           {items.length ? (
             <button disabled={!selectedChannel || submitting} className="mt-5 w-full rounded-xl bg-orange-500 py-3 font-black text-white disabled:bg-slate-300">
